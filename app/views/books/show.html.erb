@@ -23,6 +23,25 @@
             <% end %>
         </tr>
       </table>
+      <div>
+        <p>コメント件数：<%= @book.post_comments.count %></p>
+        <% @book.post_comments.each do |post_comment| %>
+          <p><%= image_tag post_comment.user.get_profile_image, size: '80x80' %>
+          <%= post_comment.comment %>
+          <% if post_comment.user == current_user %>
+            <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+          <% end %></p>
+          <%= link_to(@book.user) do %>
+            <%= @book.user.name %>
+          <% end %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with model: [@book, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
