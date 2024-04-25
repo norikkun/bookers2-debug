@@ -21,27 +21,18 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
             <% end %>
+            <td id="favorite_btn_<%= @book.id %>">
+             <%= render "favorites/btn", book: @book %>
+           </td>
+           <td id="comment_counter">
+             <%= render "book_comments/counter", book: @book %>
+           </td>
         </tr>
       </table>
-      <div>
-        <p>コメント件数：<%= @book.post_comments.count %></p>
-        <% @book.post_comments.each do |post_comment| %>
-          <p><%= image_tag post_comment.user.get_profile_image, size: '80x80' %>
-          <%= post_comment.comment %>
-          <% if post_comment.user == current_user %>
-            <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
-          <% end %></p>
-          <%= link_to(@book.user) do %>
-            <%= @book.user.name %>
-          <% end %>
-        <% end %>
-      </div>
-      <div>
-        <%= form_with model: [@book, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5' %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
+      <div id="comment_index">
+         <%= render "book_comments/index", book: @book %>
+       </div>
+       <%= render "book_comments/form", book: @book, post_comment: @post_comment %>
     </div>
   </div>
 </div>
