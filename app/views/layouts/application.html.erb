@@ -15,7 +15,11 @@
         <p id="notice"><%= notice %></p>
         <div class="d-flex justify-content-center mb-2">
           <%= render "searches/form" %>
-        </div>
+
+          <% if user_signed_in? %>
+            <%= render 'tag_searches/tagsearch' %>
+          <% end %>
+          </div>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
