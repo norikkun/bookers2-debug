@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @books = Book.new
     @user = @book.user
     @post_comment = PostComment.new
+    @book.increment!(:view_count)
   end
 
   def index
