@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get "followings" => "relationships#followings", as: "followings"
     get "followers" => "relationships#followers", as: "followers"
   end
+  get "posts_on_date" => "users#posts_on_date"
   get "/search", to: "searches#search"
   get "tag_searches/search" => "tag_searches#search"
   resources :chats, only: [:show, :create, :destroy]
